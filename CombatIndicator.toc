@@ -1,0 +1,8 @@
+## Interface: 70200
+## Title: CombatIndicator
+## Author: Glodanif
+## Version: v1.0
+## License: Apache 2.0
+## Notes: Notifies you when combat starts or ends
+
+Core.lua
