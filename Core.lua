@@ -20,7 +20,6 @@ local frame = CreateFrame('Frame')
 
 frame:RegisterEvent('PLAYER_REGEN_DISABLED')
 frame:RegisterEvent('PLAYER_REGEN_ENABLED')
-frame:RegisterEvent('INSTANCE_ENCOUNTER_ENGAGE_UNIT')
 
 frame:SetScript('OnEvent', function(self, event, ...)
     if event == 'PLAYER_REGEN_DISABLED' then
