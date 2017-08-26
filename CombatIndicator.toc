@@ -8,3 +8,4 @@
 Core.lua
 DevelopmentUtils.lua
 PreferencesScreen.xml
+VisualIndicator.xml

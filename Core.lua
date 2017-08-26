@@ -3,33 +3,19 @@ SlashCmdList.PREFERENCESUI = function()
     Preferences:Show()
 end
 
-local soundsPath = 'Interface\\AddOns\\CombatIndicator\\Sounds\\'
-
-local indicatorFrame = CreateFrame("Frame", nil, UIParent)
-indicatorFrame:SetFrameStrata('BACKGROUND')
-indicatorFrame:SetWidth(128)
-indicatorFrame:SetHeight(128)
-
-local texture = indicatorFrame:CreateTexture(nil, 'BACKGROUND')
-texture:SetTexture("Interface\\AddOns\\CombatIndicator\\Images\\combat.blp")
-texture:SetAllPoints(indicatorFrame)
-indicatorFrame.texture = texture
-
-indicatorFrame:SetPoint('TOP', 0, -64)
-indicatorFrame:Hide()
-
 local frame = CreateFrame('Frame')
 
 frame:RegisterEvent('PLAYER_REGEN_DISABLED')
 frame:RegisterEvent('PLAYER_REGEN_ENABLED')
 
+local soundsPath = 'Interface\\AddOns\\CombatIndicator\\Sounds\\'
+
 frame:SetScript('OnEvent', function(self, event, ...)
     if event == 'PLAYER_REGEN_DISABLED' then
         PlaySoundFile(soundsPath .. 'combat_enter.ogg', 'Master')
-        indicatorFrame:Show()
+        VisualIndicator:Show()
     elseif event == 'PLAYER_REGEN_ENABLED' then
         PlaySoundFile(soundsPath .. 'combat_exit.ogg', 'Master')
-        indicatorFrame:Hide()
+        VisualIndicator:Hide()
     end
 end)
-

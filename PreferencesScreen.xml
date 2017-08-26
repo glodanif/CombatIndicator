@@ -8,6 +8,7 @@
         <Anchors>
             <Anchor point="CENTER"/>
         </Anchors>
+
         <Frames>
             <Button name="$parentButton" inherits="UIPanelButtonTemplate" text="Save">
                 <Size x="128" y="21"/>
