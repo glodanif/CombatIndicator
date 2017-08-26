@@ -4,14 +4,14 @@
                    ..\..\FrameXML\UI.xsd">
 
     <Frame name="PreferencesScreen" parent="UIParent" inherits="BasicFrameTemplate" hidden="true">
-        <Size x="234" y="300"/>
+        <Size x="200" y="200"/>
         <Anchors>
             <Anchor point="CENTER"/>
         </Anchors>
 
         <Layers>
             <Layer level="OVERLAY">
-                <FontString text="Preferences" font="GameFontHighLight">
+                <FontString text="Notification Settings" font="GameFontHighLight">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="8" y="-6"/>
                     </Anchors>
@@ -26,6 +26,25 @@
                     <Anchor point="BOTTOM" x="0" y="16"/>
                 </Anchors>
             </Button>
+
+            <CheckButton name="IconCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+                <Anchors>
+                    <Anchor point="LEFTTOP" x="8" y="-36"/>
+                </Anchors>
+            </CheckButton>
+
+            <CheckButton name="SoundCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+                <Anchors>
+                    <Anchor point="LEFTTOP" X="8" Y="-72"/>
+                </Anchors>
+            </CheckButton>
         </Frames>
+
+        <Scripts>
+            <OnLoad>
+                    getglobal(IconCheckButton:GetName() .. 'Text'):SetText('Display icon')
+                    getglobal(SoundCheckButton:GetName() .. 'Text'):SetText('Play sound')
+            </OnLoad>
+        </Scripts>
     </Frame>
 </Ui>
