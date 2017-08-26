@@ -6,3 +6,5 @@
 ## Notes: Notifies you when combat starts or ends
 
 Core.lua
+DevelopmentUtils.lua
+PreferencesScreen.xml

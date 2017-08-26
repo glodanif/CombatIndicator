@@ -1,5 +1,7 @@
-SLASH_RELOADUI1 = '/rl'
-SlashCmdList.RELOADUI = ReloadUI
+SLASH_PREFERENCESUI1 = '/ci'
+SlashCmdList.PREFERENCESUI = function()
+    Preferences:Show()
+end
 
 local soundsPath = 'Interface\\AddOns\\CombatIndicator\\Sounds\\'
 
