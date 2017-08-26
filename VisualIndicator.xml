@@ -11,7 +11,7 @@
 
         <Layers>
             <Layer level="BACKGROUND">
-                <Texture name="qqq" file="Interface\AddOns\CombatIndicator\Images\combat.blp">
+                <Texture name="Indicator" file="Interface\AddOns\CombatIndicator\Images\combat.blp">
                     <Size x="128" y="128"/>
                     <Anchors>
                         <Anchor point="CENTER"/>

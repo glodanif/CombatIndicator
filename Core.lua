@@ -1,6 +1,6 @@
 SLASH_PREFERENCESUI1 = '/ci'
 SlashCmdList.PREFERENCESUI = function()
-    Preferences:Show()
+    PreferencesScreen:Show()
 end
 
 local frame = CreateFrame('Frame')
