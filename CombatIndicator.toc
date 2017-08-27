@@ -4,8 +4,10 @@
 ## Version: v1.1
 ## License: Apache 2.0
 ## Notes: Notifies you when combat starts or ends
+## SavedVariables: Preferences
 
 Core.lua
 DevelopmentUtils.lua
 PreferencesScreen.xml
+PreferencesScreen.lua
 VisualIndicator.xml

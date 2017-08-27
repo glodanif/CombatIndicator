@@ -11,7 +11,7 @@
 
         <Layers>
             <Layer level="OVERLAY">
-                <FontString text="Notification Settings" font="GameFontHighLight">
+                <FontString text="Preferences" font="GameFontHighLight">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="8" y="-6"/>
                     </Anchors>
@@ -20,31 +20,34 @@
         </Layers>
 
         <Frames>
-            <Button name="$parentButton" inherits="UIPanelButtonTemplate" text="Save">
+            <Button name="SaveButton" inherits="UIPanelButtonTemplate" text="Save">
                 <Size x="128" y="21"/>
                 <Anchors>
                     <Anchor point="BOTTOM" x="0" y="16"/>
                 </Anchors>
             </Button>
 
-            <CheckButton name="IconCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+            <CheckButton name="IconCheckButton" inherits="UICheckButtonTemplate" checked="true">
                 <Anchors>
                     <Anchor point="LEFTTOP" x="8" y="-36"/>
                 </Anchors>
+                <Scripts>
+                    <OnLoad>
+                            getglobal(IconCheckButton:GetName() .. 'Text'):SetText('Display icon')
+                    </OnLoad>
+                </Scripts>
             </CheckButton>
 
-            <CheckButton name="SoundCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+            <CheckButton name="SoundCheckButton" inherits="UICheckButtonTemplate" checked="true">
                 <Anchors>
                     <Anchor point="LEFTTOP" X="8" Y="-72"/>
                 </Anchors>
+                <Scripts>
+                    <OnLoad>
+                            getglobal(SoundCheckButton:GetName() .. 'Text'):SetText('Play sound')
+                    </OnLoad>
+                </Scripts>
             </CheckButton>
         </Frames>
-
-        <Scripts>
-            <OnLoad>
-                    getglobal(IconCheckButton:GetName() .. 'Text'):SetText('Display icon')
-                    getglobal(SoundCheckButton:GetName() .. 'Text'):SetText('Play sound')
-            </OnLoad>
-        </Scripts>
     </Frame>
 </Ui>

@@ -1,21 +1,38 @@
-SLASH_PREFERENCESUI1 = '/ci'
-SlashCmdList.PREFERENCESUI = function()
-    PreferencesScreen:Show()
-end
-
 local frame = CreateFrame('Frame')
 
 frame:RegisterEvent('PLAYER_REGEN_DISABLED')
 frame:RegisterEvent('PLAYER_REGEN_ENABLED')
+frame:RegisterEvent("ADDON_LOADED")
 
 local soundsPath = 'Interface\\AddOns\\CombatIndicator\\Sounds\\'
 
-frame:SetScript('OnEvent', function(self, event, ...)
+frame:SetScript('OnEvent', function(self, event, arg1)
+
     if event == 'PLAYER_REGEN_DISABLED' then
-        PlaySoundFile(soundsPath .. 'combat_enter.ogg', 'Master')
-        VisualIndicator:Show()
+
+        if (Preferences.notifyViaSound) then
+            PlaySoundFile(soundsPath .. 'combat_enter.ogg', 'Master')
+        end
+        if (Preferences.notifyViaIcon) then
+            VisualIndicator:Show()
+        end
+
     elseif event == 'PLAYER_REGEN_ENABLED' then
-        PlaySoundFile(soundsPath .. 'combat_exit.ogg', 'Master')
-        VisualIndicator:Hide()
+
+        if (Preferences.notifyViaSound) then
+            PlaySoundFile(soundsPath .. 'combat_exit.ogg', 'Master')
+        end
+        if (Preferences.notifyViaIcon) then
+            VisualIndicator:Hide()
+        end
+
+    elseif event == "ADDON_LOADED" and arg1 == 'CombatIndicator' then
+
+        if Preferences == nil then
+            Preferences = {
+                notifyViaIcon = true,
+                notifyViaSound = true
+            }
+        end
     end
 end)
