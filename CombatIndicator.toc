@@ -1,5 +1,5 @@
 ## Interface: 70200
-## Title: CombatIndicator
+## Title: Combat Indicator
 ## Author: Glodanif
 ## Version: v1.1
 ## License: Apache 2.0
