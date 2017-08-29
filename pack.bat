@@ -1,27 +1,44 @@
 @echo off
+echo Start
 
-for /f "tokens=*" %%a in (CombatIndicator.toc) do (
+set "IGNORE=.gitignore .git .idea output CONTRIBUTING.md README.md"
+
+@rem getting current directory name
+for %%* in (.) do set CURRENT_DIRECTORY=%%~nx*
+
+@rem generating archive name based on version from a .toc file
+for /f "tokens=*" %%a in (%CURRENT_DIRECTORY%.toc) do (
     set LINE=%%a
     setlocal enabledelayedexpansion
     if not "!LINE:Version=!"=="!LINE!" (
-        set "ARCHIVE_NAME=CombatIndicator !LINE:## Version: =!.zip"
-        goto :zip
+        set "ARCHIVE_NAME=%CURRENT_DIRECTORY% !LINE:## Version: =!.zip"
+        goto :proceed
     )
     endlocal
 )
 
-:zip
-echo %ARCHIVE_NAME%
+:proceed
+echo Archive name: %ARCHIVE_NAME%
 
-if not exist output\CombatIndicator mkdir output\CombatIndicator
+@rem copying addon's files into temporary directory
+if not exist output\%CURRENT_DIRECTORY% mkdir output\%CURRENT_DIRECTORY%
 
-set "IGNORED = .gitignore .git .idea"
-set LIST = for %%x in (*) do set LIST=!LIST! %%x
 
-echo %LIST%
+rem set LIST = for %%x in (*) do set LIST=!LIST! %%x
 
-for %%i in (%LIST%) do (
-    echo %%i
+rem for %%i in (%LIST%) do (
+rem     echo %%i
+rem )
+
+@rem zipping using 7zip
+set ZIP_PATH="C:\Program Files\7-Zip\7z.exe"
+if not exist %ZIP_PATH% (
+    echo Cannot find 7-Zip application. Expected location %ZIP_PATH%
+) else (
+    cd output
+    echo Zipping...
+    %ZIP_PATH% a -tzip "%ARCHIVE_NAME%" %CURRENT_DIRECTORY%
+    echo Successfully zipped: output/%ARCHIVE_NAME%
 )
 
-@rem "c:\Program Files\7-Zip\7z.exe" a -tzip %ARCHIVE_NAME% %LIST%
+echo Finish
