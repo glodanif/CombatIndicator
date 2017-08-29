@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+output
+*.zip
+*.iml

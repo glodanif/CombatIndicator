@@ -22,9 +22,7 @@ frame:SetScript('OnEvent', function(self, event, arg1)
         if (Preferences.notifyViaSound) then
             PlaySoundFile(soundsPath .. 'combat_exit.ogg', 'Master')
         end
-        if (Preferences.notifyViaIcon) then
-            VisualIndicator:Hide()
-        end
+        VisualIndicator:Hide()
 
     elseif event == "ADDON_LOADED" and arg1 == 'CombatIndicator' then
 
