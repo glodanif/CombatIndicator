@@ -1,7 +1,7 @@
 @echo off
 echo Start
 
-set "IGNORE=.gitignore .git .idea output CONTRIBUTING.md README.md pack.bat"
+set "IGNORE=\.gitignore\.git\.idea\output\CONTRIBUTING.md\README.md\pack.bat\"
 
 if exist output @rd /s/q output
 
@@ -25,12 +25,18 @@ echo Archive name: %ARCHIVE_NAME%
 @rem copying addon's files into a temporary directory
 if not exist output\%CURRENT_DIRECTORY% mkdir output\%CURRENT_DIRECTORY%
 
+setlocal enabledelayedexpansion
 for /d %%a in (*) do (
-    xcopy /v/h/z/e/i "%%a" "output\%CURRENT_DIRECTORY%\%%a"
+    if /i "!IGNORE:\%%~nxa\=!" equ "%IGNORE%" (
+        xcopy /v/h/z/e/i "%%a" "output\%CURRENT_DIRECTORY%\%%a"
+    )
 )
 for %%a in (*.*) do (
-    xcopy /v/h/z "%%a" "output\%CURRENT_DIRECTORY%"
+    if /i "!IGNORE:\%%~nxa\=!" equ "%IGNORE%" (
+        xcopy /v/h/z "%%a" "output\%CURRENT_DIRECTORY%"
+    )
 )
+endlocal
 
 @rem zipping using 7zip
 set ZIP_PATH="C:\Program Files\7-Zip\7z.exe"
