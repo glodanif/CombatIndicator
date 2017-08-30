@@ -1,7 +1,7 @@
 @echo off
 echo Start
 
-set "IGNORE=\.gitignore\.git\.idea\output\CONTRIBUTING.md\README.md\pack.bat\"
+set "IGNORE=\.gitignore\.git\.idea\output\CONTRIBUTING.md\README.md\packager.bat\"
 
 if exist output @rd /s/q output
 
@@ -28,24 +28,25 @@ if not exist output\%CURRENT_DIRECTORY% mkdir output\%CURRENT_DIRECTORY%
 setlocal enabledelayedexpansion
 for /d %%a in (*) do (
     if /i "!IGNORE:\%%~nxa\=!" equ "%IGNORE%" (
-        xcopy /v/h/z/e/i "%%a" "output\%CURRENT_DIRECTORY%\%%a"
+        xcopy /v/z/e/i "%%a" "output\%CURRENT_DIRECTORY%\%%a"
     )
 )
 for %%a in (*.*) do (
     if /i "!IGNORE:\%%~nxa\=!" equ "%IGNORE%" (
-        xcopy /v/h/z "%%a" "output\%CURRENT_DIRECTORY%"
+        xcopy /v/z "%%a" "output\%CURRENT_DIRECTORY%"
     )
 )
 endlocal
 
 @rem zipping using 7zip
+cd output
 set ZIP_PATH="C:\Program Files\7-Zip\7z.exe"
 if not exist %ZIP_PATH% (
     echo Cannot find 7-Zip application. Expected location %ZIP_PATH%
 ) else (
-    cd output
     echo Zipping...
     %ZIP_PATH% a -tzip "%ARCHIVE_NAME%" %CURRENT_DIRECTORY%
-    @rd /s/q "%CURRENT_DIRECTORY%"
     echo Successfully zipped: output/%ARCHIVE_NAME%
 )
+
+@rd /s/q "%CURRENT_DIRECTORY%"
