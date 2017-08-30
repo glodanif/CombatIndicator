@@ -1,7 +1,9 @@
 @echo off
 echo Start
 
-set "IGNORE=.gitignore .git .idea output CONTRIBUTING.md README.md"
+set "IGNORE=.gitignore .git .idea output CONTRIBUTING.md README.md pack.bat"
+
+if exist output @rd /s/q output
 
 @rem getting current directory name
 for %%* in (.) do set CURRENT_DIRECTORY=%%~nx*
@@ -20,15 +22,15 @@ for /f "tokens=*" %%a in (%CURRENT_DIRECTORY%.toc) do (
 :proceed
 echo Archive name: %ARCHIVE_NAME%
 
-@rem copying addon's files into temporary directory
+@rem copying addon's files into a temporary directory
 if not exist output\%CURRENT_DIRECTORY% mkdir output\%CURRENT_DIRECTORY%
 
-
-rem set LIST = for %%x in (*) do set LIST=!LIST! %%x
-
-rem for %%i in (%LIST%) do (
-rem     echo %%i
-rem )
+for /d %%a in (*) do (
+    xcopy /v/h/z/e/i "%%a" "output\%CURRENT_DIRECTORY%\%%a"
+)
+for %%a in (*.*) do (
+    xcopy /v/h/z "%%a" "output\%CURRENT_DIRECTORY%"
+)
 
 @rem zipping using 7zip
 set ZIP_PATH="C:\Program Files\7-Zip\7z.exe"
@@ -38,7 +40,6 @@ if not exist %ZIP_PATH% (
     cd output
     echo Zipping...
     %ZIP_PATH% a -tzip "%ARCHIVE_NAME%" %CURRENT_DIRECTORY%
+    @rd /s/q "%CURRENT_DIRECTORY%"
     echo Successfully zipped: output/%ARCHIVE_NAME%
 )
-
-echo Finish
