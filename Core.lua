@@ -10,24 +10,24 @@ frame:SetScript('OnEvent', function(self, event, arg1)
 
     if event == 'PLAYER_REGEN_DISABLED' then
 
-        if (Preferences.notifyViaSound) then
+        if (CI_Preferences.notifyViaSound) then
             PlaySoundFile(soundsPath .. 'combat_enter.ogg', 'Master')
         end
-        if (Preferences.notifyViaIcon) then
+        if (CI_Preferences.notifyViaIcon) then
             VisualIndicator:Show()
         end
 
     elseif event == 'PLAYER_REGEN_ENABLED' then
 
-        if (Preferences.notifyViaSound) then
+        if (CI_Preferences.notifyViaSound) then
             PlaySoundFile(soundsPath .. 'combat_exit.ogg', 'Master')
         end
         VisualIndicator:Hide()
 
     elseif event == "ADDON_LOADED" and arg1 == 'CombatIndicator' then
 
-        if Preferences == nil then
-            Preferences = {
+        if CI_Preferences == nil then
+            CI_Preferences = {
                 notifyViaIcon = true,
                 notifyViaSound = true
             }
